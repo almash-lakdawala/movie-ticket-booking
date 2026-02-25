@@ -6,7 +6,7 @@ export const db = getFirestore(app);
 
 
 
-
+//the following function add created users data in users collection (firebase)
 export const createUser = async (user: any) => {
   try {
    
@@ -33,3 +33,16 @@ export const createUser = async (user: any) => {
     return false;
   }
 };
+
+//the following function will add movie data in movies collectiion (firebase)
+
+export const addMovie = async (movie: any): Promise<boolean> => {
+    try{ 
+      await addDoc(collection(db, "movies"), movie);
+      return true;
+    }
+    catch (error){
+      return false;
+    }
+}
+
