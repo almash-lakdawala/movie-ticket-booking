@@ -1,4 +1,4 @@
-import { deleteDoc, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { app } from "./config";
 import { collection, addDoc } from 'firebase/firestore';
 
@@ -45,6 +45,19 @@ export const addMovie = async (movie: any): Promise<boolean> => {
       return false;
     }
 }
+
+//the following function add theater data in theater collection
+
+export const addTheater = async (theater: any): Promise<boolean> => {
+  try {
+    await addDoc(collection(db,"theaters"),theater )
+    return true;
+  }
+  catch (error){
+    return false;
+  }
+}
+
 
 
 
@@ -93,3 +106,21 @@ export const updateMovie = async (id: string, data: any) => {
 		return false;
 	}
 }
+
+
+//the following function will fetch the particular movie data by it's id
+
+export const getMovieById = async ( id: string  ) => {
+  const ref = doc(db, "movies",  id);
+  const snap = await getDoc(ref);
+
+  if(!snap.exists()) return null;
+
+  return {
+		id: snap.id,
+		...snap.data()
+	};
+
+}
+
+
