@@ -48,11 +48,7 @@
 
 			<input bind:value={poster} placeholder="Poster URL" class="w-full rounded border p-2" />
 
-			<input
-				bind:value={duration}
-				placeholder="Duration (2h 30m)"
-				class="w-full rounded border p-2"
-			/>
+			<input bind:value={duration} placeholder="Duration" class="w-full rounded border p-2" />
 
 			<input bind:value={language} placeholder="Language" class="w-full rounded border p-2" />
 		</div>

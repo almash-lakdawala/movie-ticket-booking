@@ -1,4 +1,4 @@
-import { getDocs, getFirestore, query, where } from "firebase/firestore";
+import { deleteDoc, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { app } from "./config";
 import { collection, addDoc } from 'firebase/firestore';
 
@@ -46,3 +46,50 @@ export const addMovie = async (movie: any): Promise<boolean> => {
     }
 }
 
+
+
+
+// the following function will display all movies on admin panle Reads all documents
+// Returns array of movies
+export const displayMovie = async () => {
+    try{
+      const snap = await getDocs(collection(db, "movies"));
+
+      return snap.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+    }
+   catch (error) {
+		console.log(error);
+		return [];
+	}
+}
+
+
+//the following function will delete the movie data in collection
+
+export const deleteMovie = async (id: string): Promise<boolean> => {
+  try {
+    await deleteDoc(doc(db, "movies",id));
+    return true;
+
+  }
+  catch(error){
+    alert(error);
+    return false;
+  }
+}
+
+
+//the following function will update the data in collection 
+export const updateMovie = async (id: string, data: any) => {
+  try {
+    await updateDoc(doc(db, "movies",id),data);
+    return true;
+
+  }catch (error) {
+		alert(error);
+		return false;
+	}
+}

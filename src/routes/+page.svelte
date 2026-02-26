@@ -1,25 +1,32 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+
 	import { currentUser } from '$lib/stores/user';
+	import { onMount } from 'svelte';
+	import { displayMovie } from '$lib/firebase/db';
+	import MovieCard from '$lib/components/MovieCard.svelte';
 
 	function logout() {
 		currentUser.set(null);
 		goto('/login');
 	}
+
+	let movies: any[] = [];
+
+	onMount(async () => {
+		movies = await displayMovie();
+	});
 </script>
 
 <section>
 	<div class="relative font-serif">
-		<!-- Background -->
 		<img src="/images/bg.svg" class="h-screen w-full object-cover" alt="" />
 
-		<!-- Navbar -->
 		<div class="absolute top-0 left-0 w-full px-10 py-6">
 			<div class="flex items-center justify-between">
 				<!-- Logo -->
 				<img src="/images/logo.svg" class="h-12" alt="Logo" />
 
-				<!-- Right buttons -->
 				<div class="flex items-center gap-6">
 					<button class="text-lg font-medium text-white transition hover:text-green-400">
 						My Ticket
@@ -40,5 +47,10 @@
 		>
 			Now Showing
 		</h1>
+		<div class="absolute top-60 left-5 flex flex-wrap justify-center gap-10">
+			{#each movies as movie}
+				<MovieCard {movie} />
+			{/each}
+		</div>
 	</div>
 </section>
