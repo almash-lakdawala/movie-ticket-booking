@@ -79,6 +79,24 @@ export const displayMovie = async () => {
 	}
 }
 
+//the following function will display the theater data from theaters collection
+
+export const displayTheater = async () => {
+  try{
+    const snap = await getDocs(collection(db, 'theaters'));
+
+    return snap.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+  }
+  catch (error) {
+    alert(error);
+    return [];
+
+  }
+}
+
 
 //the following function will delete the movie data in collection
 

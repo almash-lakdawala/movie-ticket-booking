@@ -3,7 +3,7 @@
 	export let movie: any;
 
 	const openMovie = () => {
-		goto(`/moviesById/${movie.id}`);
+		goto(`/moviesById/${movie.id}z`);
 	};
 </script>
 

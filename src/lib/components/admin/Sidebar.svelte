@@ -15,8 +15,8 @@
 	};
 </script>
 
-<aside class=" h-screen w-64 bg-[#BDF0C1] shadow-sm">
-	<div class="border-b p-6 text-2xl font-semibold text-[#101012]">Admin Panel</div>
+<aside class="  h-screen w-64 bg-[#BDF0C1] shadow-sm">
+	<div class="mt-20 border-b p-6 text-2xl font-semibold text-[#101012]">Admin Panel</div>
 
 	<nav class="space-y-2 p-4">
 		{#each menuItems as item}
